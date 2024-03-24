@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -15,6 +16,8 @@ import org.testng.annotations.*;
 
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
 
 public class BaseDriver {
     public static Logger logKeeper = LogManager.getLogger();
@@ -48,8 +51,14 @@ public class BaseDriver {
         WebElement password=driver.findElement(By.id("password"));
         password.sendKeys("Admin123");
 
-        WebElement location=driver.findElement(By.xpath("//*[@id='Inpatient Ward']"));
-        location.click();
+        // Locate all the option elements
+        List<WebElement> options = driver.findElements(By.xpath("//*[@tabindex='0']"));
+
+        // Generate a random index within the range of options size
+        int randomIndex = new Random().nextInt(options.size());
+
+        // Click on the option at the random index
+        options.get(randomIndex).click();
 
         WebElement loginBtn=driver.findElement(By.id("loginButton"));
         loginBtn.click();
