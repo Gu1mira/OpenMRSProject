@@ -17,50 +17,50 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseDriver {
-    public static Logger logTutma = LogManager.getLogger(); // Logları ekleyeceğim nesneyi başlattım.
+    public static Logger logKeeper = LogManager.getLogger();
 
     public static WebDriver driver;
     public static WebDriverWait wait;
     @BeforeClass
-    public void BaslangicIslemleri(){ // TearStart
-       // System.out.println("başlangıç işlemleri yapılıyor"); //driver oluşturma, wait işlemleri,
+    public void BaslangicIslemleri(){
+
 
         driver=new ChromeDriver();
 
-        //driver.manage().window().maximize(); // Ekranı max yapıyor.
+        driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20)); // 20 sn mühlet: sayfayı yükleme mühlet
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20)); // 20 sn mühlet: elementi bulma mühleti
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        src.Utilities.Tools.Bekle(2);
+        Tools.Bekle(2);
         LoginTest();
     }
 
     public void LoginTest(){
-        System.out.println("Login Test başladı");
-        logTutma.info("Log işlemi başladı");
-        driver.get("https://opencart.abstracta.us/index.php?route=account/login");
-        src.Utilities.Tools.Bekle(2);
+        System.out.println("Login Test started");
+        logKeeper.info("Login Test started");
+        driver.get("https://demo.openmrs.org/openmrs/login.htm");
+        wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/login.htm"));
 
-        WebElement email=driver.findElement(By.id("input-email"));
-        email.sendKeys("testng1@gmail.com");
+        WebElement email=driver.findElement(By.id("username"));
+        email.sendKeys("admin");
 
-        WebElement password=driver.findElement(By.id("input-password"));
-        password.sendKeys("123qweasd");
+        WebElement password=driver.findElement(By.id("password"));
+        password.sendKeys("Admin123");
 
-        WebElement loginBtn=driver.findElement(By.xpath("//input[@type='submit']")); //By.cssSelector("[value='Login']")
+        WebElement location=driver.findElement(By.xpath("//*[@id='Inpatient Ward']"));
+        location.click();
+
+        WebElement loginBtn=driver.findElement(By.id("loginButton"));
         loginBtn.click();
 
-        wait.until(ExpectedConditions.titleIs("My Account"));
-        Assert.assertTrue(driver.getTitle().equals("My Account"));
-        System.out.println("Login Test bitti");
+        wait.until(ExpectedConditions.titleIs("Home"));
+        Assert.assertTrue(driver.getTitle().equals("Home"));
+        System.out.println("Login is finished.");
 
-        logTutma.info("Log işlemi tamamlandı"); // normal bir bilgi
+        logKeeper.info("Log işlemi tamamlandı");
 
-        //legonun kapanması için- butonlar altına kalınca tıklatma yapılamıyor
-        Actions actions=new Actions(driver);
-        actions.moveToElement(driver.findElement(By.className("bitnami-corner-image"))).perform();
-        driver.findElement(By.id("bitnami-close-banner-button")).click();
+
     }
 
     @AfterClass
@@ -68,24 +68,24 @@ public class BaseDriver {
         //System.out.println("kapanış işlemleri yapılıyor"); //BekleKapat
 
         //logout
-        src.Utilities.Tools.Bekle(3);
+        Tools.Bekle(3);
         driver.quit();
 
-        logTutma.info("Driver kapatıldı");
+        logKeeper.info("Driver kapatıldı");
     }
 
     @BeforeMethod
     public void BeforeMetod(){
-         logTutma.info("Metod başladı");
+         logKeeper.info("Metod başladı");
 
-         logTutma.warn("WARN : Metod başladı, hata oluşmuş olsa idi");
+         logKeeper.warn("WARN : Metod başladı, hata oluşmuş olsa idi");
     }
 
     @AfterMethod
     public void AfterMetod(ITestResult sonuc){ // tesin sonuç ve isim bilgisini olduğu değişkeni
-        logTutma.info(sonuc.getName()+  " Metod bitti "+ (sonuc.getStatus() ==1 ? "Passed" : "failed"));
+        logKeeper.info(sonuc.getName()+  " Metod bitti "+ (sonuc.getStatus() ==1 ? "Passed" : "failed"));
 
-        logTutma.warn("WARN : Metod bitti, hata oluşmuş olsa idi");
+        logKeeper.warn("WARN : Metod bitti, hata oluşmuş olsa idi");
     }
 
 
