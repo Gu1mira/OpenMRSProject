@@ -1,6 +1,5 @@
-package TC_409.Utilities;
+package Utilities;
 
-import TC_409.Utilities.BaseDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
