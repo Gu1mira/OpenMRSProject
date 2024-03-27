@@ -1,12 +1,12 @@
-package TC_409;
+package US_409;
 
 import Utilities.BaseDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TC_409_Elements {
-    public TC_409_Elements(){
+public class US_409_Elements {
+    public US_409_Elements(){
         PageFactory.initElements(BaseDriver.driver,this);
     }
 
