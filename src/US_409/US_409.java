@@ -1,4 +1,4 @@
-package TC_409;
+package US_409;
 
 import Utilities.BaseDriver;
 import org.openqa.selenium.By;
@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Random;
 
-public class TC_409 extends BaseDriver {
+public class US_409 extends BaseDriver {
     @Test
     public void Test409(){
-        TC_409_Elements elems=new TC_409_Elements();
+        US_409_Elements elems=new US_409_Elements();
 
         System.out.println("Login Test started");
         logKeeper.info("Login Test started");
