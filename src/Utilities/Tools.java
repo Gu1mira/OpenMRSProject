@@ -1,10 +1,11 @@
-package TC_409.Utilities;
+package src.Utilities;
 
-import TC_409.Utilities.BaseDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import src.Utilities.BaseDriver;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Tools {
     }
 
     public static void SuccessMessageValidation(){
+
         WebElement msgLabel= BaseDriver.driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
         Assert.assertTrue(msgLabel.getText().toLowerCase().contains("success"));
     }
