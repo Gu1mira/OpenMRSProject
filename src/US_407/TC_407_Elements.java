@@ -25,10 +25,14 @@ public class TC_407_Elements extends BaseDriver {
     @FindBy(css = "[class='recent-lozenge']")
     public WebElement searchResult;
 
-    @FindBy(xpath = "//div[contains(text(),'Delete Patient')]")
-    public WebElement deletePatient;
+    @FindBy(xpath = "//a[contains(@id,'deletePatient')]")
+    public WebElement deletePatient; //
 
-    @FindBy(xpath = "//div[contains(text(),'Delete Patient')]")
-    public WebElement confirmButton;
+    @FindBy(xpath = "//input[@id='delete-reason']")
+    public WebElement deleteReason;
+
+    @FindBy(xpath = "//input[@id='delete-reason']/..//button[@class='confirm right']")
+    public WebElement deleteConfirm;
+
 
 }
