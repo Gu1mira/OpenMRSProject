@@ -1,7 +1,7 @@
 package US_407;
 
-import TC_409.Utilities.BaseDriver;
-import TC_409.Utilities.Tools;
+import Utility.BaseDriver;
+import Utility.Tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
