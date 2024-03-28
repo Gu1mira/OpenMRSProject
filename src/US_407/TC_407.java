@@ -1,7 +1,7 @@
 package US_407;
 
-import TC_409.Utilities.BaseDriver;
-import TC_409.Utilities.Tools;
+import Utility.BaseDriver;
+import Utility.Tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Random;
@@ -18,6 +19,9 @@ public class TC_407 extends BaseDriver {
     public void TC_407(){
 
         TC_407_Elements TTT=new TC_407_Elements();
+
+        SoftAssert _softAssert=new SoftAssert();
+
         driver.get("https://demo.openmrs.org/openmrs/login.htm");
         wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/login.htm"));
 
@@ -44,7 +48,10 @@ public class TC_407 extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(TTT.deletePatient));
         TTT.deletePatient.click();
 
+        TTT.deleteReason.sendKeys("Canım Öyle İstiyor");
 
+        TTT.deleteConfirm.click();
+        _softAssert.assertAll();
 
 
 
