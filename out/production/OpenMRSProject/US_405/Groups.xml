@@ -7,12 +7,14 @@
         <groups>
             <run>
                 <include name="Smoke Test"></include>
+                <include name="PatientManagement"></include>
             </run>
         </groups>
 
         <!--çalışcak classların yazıldığı bölüm-->
         <classes>
             <class name="US_405.US_405"></class>
+            <class name="US_406.US_406"></class>
         </classes>
 
     </test>
