@@ -80,4 +80,5 @@ public class TC_404 {
     private boolean isOnPatientPage() {
         return driver.getCurrentUrl().contains("patient") && driver.getPageSource().contains("Patient Name") && driver.getPageSource().contains("Patient ID");
     }
+    //yenilemek amacli
 }
