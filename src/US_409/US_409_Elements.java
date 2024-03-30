@@ -16,6 +16,15 @@ public class US_409_Elements {
     @FindBy(xpath = "//*[@class='icon-user']")
     public WebElement registerPatient;
 
+    @FindBy(id = "username")
+    public WebElement loginEmail;
+
+    @FindBy(id = "password")
+    public WebElement loginPassword;
+
+    @FindBy(id = "loginButton")
+    public WebElement loginButton;
+
     @FindBy(xpath = "//input[@name='givenName']")
     public WebElement name;
 
@@ -26,7 +35,7 @@ public class US_409_Elements {
     public WebElement nextButton;
 
     @FindBy(xpath = "(//*[@id='gender-field']/option)[1]")
-    public WebElement Male;
+    public WebElement male;
 
     @FindBy(id = "birthdateDay-field")
     public WebElement birthdayDay;
@@ -46,6 +55,37 @@ public class US_409_Elements {
 
     @FindBy(xpath = "//*[@class='float-sm-right']/span")
     public WebElement id;
+
+    @FindBy(xpath = "//*[contains(@id,'datamanagement')]")
+    public WebElement dataManagement;
+
+    @FindBy(xpath = "//*[contains(@id, 'mergePatients')]")
+    public WebElement mergePatients;
+
+    @FindBy(id = "patient1-text")
+    public WebElement fieldID1;
+
+    @FindBy(id = "patient2-text")
+    public WebElement fieldID2;
+
+    @FindBy(xpath = "//*[@class='confirm']")
+    public WebElement mergeConfirm;
+
+    @FindBy(id = "first-patient")
+    public WebElement firstPatientChoose;
+
+    @FindBy(xpath = "//input[@value='Yes, continue']")
+    public WebElement yesMerge;
+
+
+
+
+
+
+
+
+
+
 
 
 
