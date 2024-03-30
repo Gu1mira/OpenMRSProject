@@ -3,129 +3,90 @@ package US_409;
 import Utilities.BaseDriver;
 import Utilities.Tools;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class US_409 extends BaseDriver {
-    @Test
+    @Test (groups = {"Regression", "PatientManagement"})
     public void TestLogin() {
-        US_409_Elements elems = new US_409_Elements();
+        US_409_Elements elems=new US_409_Elements();
+        List<String> patientIDs = new ArrayList<>();
 
-        System.out.println("Login Test started");
-        logKeeper.info("Login Test started");
         driver.get("https://demo.openmrs.org/openmrs/login.htm");
         wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/login.htm"));
-
-        WebElement email = driver.findElement(By.id("username"));
-        email.sendKeys("admin");
-
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("Admin123");
-
-        // Locate all the option elements
+        Tools.mySendKeys(elems.loginEmail, "admin");
+        Tools.mySendKeys(elems.loginPassword, "Admin123");
         List<WebElement> options = driver.findElements(By.xpath("//*[@tabindex='0']"));
-
-        // Generate a random index within the range of options size
         int randomIndex = new Random().nextInt(options.size());
-
-        // Click on the option at the random index
         options.get(randomIndex).click();
-
-        WebElement loginBtn = driver.findElement(By.id("loginButton"));
-        loginBtn.click();
-
+        Tools.myClick(elems.loginButton);
         wait.until(ExpectedConditions.titleIs("Home"));
-        Assert.assertTrue(driver.getTitle().equals("Home"));
-        System.out.println("Login is finished.");
+        Assert.assertEquals("Home", driver.getTitle());
+        Tools.myClick(elems.registerPatient);
 
-        logKeeper.info("Log işlemi tamamlandı");
+        Tools.mySendKeys(elems.name, "Michael");
+        Tools.mySendKeys(elems.surname,"Johnson");
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.male);
+        Tools.myClick(elems.nextButton);
+        Tools.mySendKeys(elems.birthdayDay,"12");
+        Tools.myClick(elems.birthdayMonth);
+        Tools.mySendKeys(elems.birthdayYear,"1980");
+        Tools.myClick(elems.nextButton);
+        Tools.mySendKeys(elems.address,"Mustamae tee, 123-4, Tallinn, Estonia");
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.submit);
+        patientIDs.add(elems.id.getText());
+        System.out.println("Patient1 id= "+patientIDs.get(0));
 
+        Tools.myClick(elems.homePage);
+        Tools.myClick(elems.registerPatient);
 
-        elems.registerPatient.click();
-    }
+        Tools.mySendKeys(elems.name, "Peter");
+        Tools.mySendKeys(elems.surname,"Lee");
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.male);
+        Tools.myClick(elems.nextButton);
+        Tools.mySendKeys(elems.birthdayDay,"1");
+        Tools.myClick(elems.birthdayMonth);
+        Tools.mySendKeys(elems.birthdayYear,"1970");
+        Tools.myClick(elems.nextButton);
+        Tools.mySendKeys(elems.address,"Money str, 000-2, Tallinn, Estonia");
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.nextButton);
+        Tools.myClick(elems.submit);
+        patientIDs.add(elems.id.getText());
+        System.out.println("Patient1 id= "+patientIDs.get(1));
 
-    @Test(dataProvider = "patientData")
-    public void patientRegister1(String name, String surname, String day, String year, String address) {
-        US_409_Elements elems1 = new US_409_Elements();
-        elems1.name.sendKeys(name);
-        Tools.Bekle(2);
-        elems1.surname.sendKeys(surname);
-        Tools.Bekle(2);
-        elems1.nextButton.click();
-        Tools.Bekle(2);
-        elems1.Male.click();
-        Tools.Bekle(2);
-        elems1.nextButton.click();
-        Tools.Bekle(2);
-        elems1.birthdayDay.sendKeys(day);
-        Tools.Bekle(2);
-        elems1.birthdayMonth.click();
-        Tools.Bekle(2);
-        elems1.birthdayYear.sendKeys(year);
-        Tools.Bekle(2);
-        elems1.nextButton.click();
-        Tools.Bekle(2);
-        elems1.address.sendKeys(address);
-        Tools.Bekle(2);
-        elems1.nextButton.click();
-        Tools.Bekle(2);
-        elems1.nextButton.click();
-        Tools.Bekle(2);
-        elems1.submit.click();
-        Tools.Bekle(2);
-        String id1=elems1.id.getText();
-    }
-
-
-    @Test(dataProvider = "patientData")
-    public void patientRegister2(String name, String surname, String day, String year, String address) {
-        US_409_Elements elems2 = new US_409_Elements();
-        elems2.homePage.click();
-        elems2.registerPatient.click();
-        elems2.name.sendKeys(name);
-        Tools.Bekle(2);
-        elems2.surname.sendKeys(surname);
-        Tools.Bekle(2);
-        elems2.nextButton.click();
-        Tools.Bekle(2);
-        elems2.Male.click();
-        Tools.Bekle(2);
-        elems2.nextButton.click();
-        Tools.Bekle(2);
-        elems2.birthdayDay.sendKeys(day);
-        Tools.Bekle(2);
-        elems2.birthdayMonth.click();
-        Tools.Bekle(2);
-        elems2.birthdayYear.sendKeys(year);
-        Tools.Bekle(2);
-        elems2.nextButton.click();
-        Tools.Bekle(2);
-        elems2.address.sendKeys(address);
-        Tools.Bekle(2);
-        elems2.nextButton.click();
-        Tools.Bekle(2);
-        elems2.nextButton.click();
-        Tools.Bekle(2);
-        elems2.submit.click();
-        Tools.Bekle(2);
-        String id1=elems2.id.getText();
-    }
+        Tools.myClick(elems.homePage);
+        Tools.myClick(elems.dataManagement);
+        Tools.myClick(elems.mergePatients);
+        Tools.mySendKeys(elems.fieldID1, patientIDs.get(0));
+        Tools.mySendKeys(elems.fieldID2, patientIDs.get(1)+ Keys.ENTER);
+        Tools.myClick(elems.mergeConfirm);
+        Tools.myClick(elems.firstPatientChoose);
+        Tools.myClick(elems.yesMerge);
 
 
-    @DataProvider(name = "patientData")
-    public static Object[][] patientData() {
-        return new Object[][]{
-                {"Michael", "Johnson", "12", "1980", "Mustamae tee, 123-4, Tallinn, Estonia"},
-                {"Peter", "Lee", "1", "1870", "Money str, 000-2, Tallinn, Estonia"},
-        };
+
+
+
 
 
     }
+
+
+
+
+
 }
+
 
