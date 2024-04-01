@@ -1,5 +1,6 @@
-package src.US_402;
+package US_402;
 
+import Utilities.BaseDriver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,27 +8,27 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import Utility.BaseDriver;
+
+import java.util.List;
+import java.util.Random;
 
 public class TC_402 extends BaseDriver {
 
-    WebDriver driver;
 
  @Test(dataProvider = "userData")
     public void testLogin(String username, String password) {
 
         driver.get("https://openmrs.org/");
 
-        WebElement demoButton = driver.findElement(By.xpath("//button[contains(text(),'DEMO')]"));
+        WebElement demoButton = driver.findElement(By.xpath("(//a[contains(text(),'Demo')])[2]"));
         demoButton.click();
 
-        WebElement exploreButton = driver.findElement(By.xpath("//button[contains(text(),'Explore OpenMRS 2')]"));
+        WebElement exploreButton = driver.findElement(By.xpath("//*[text()='Explore OpenMRS 2']"));
         exploreButton.click();
 
-        WebElement enterDemoButton = driver.findElement(By.xpath("//button[contains(text(),'Enter the OpenMRS 2 Demo')]"));
+        WebElement enterDemoButton = driver.findElement(By.linkText("Enter the OpenMRS 2 Demo"));
         enterDemoButton.click();
 
-        driver.get("https://openmrs.org/");
 
         WebElement usernameInput = driver.findElement(By.id("username"));
         usernameInput.sendKeys(username);
@@ -35,11 +36,16 @@ public class TC_402 extends BaseDriver {
         WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.sendKeys(password);
 
-        WebElement loginButton = driver.findElement(By.xpath("//button[contains(text(),'loginButton')]"));
+        List<WebElement> options = driver.findElements(By.xpath("//*[@tabindex='0']"));
+        int randomIndex = new Random().nextInt(options.size());
+        options.get(randomIndex).click();
+
+        WebElement loginButton = driver.findElement(By.id("loginButton"));
         loginButton.click();
 
-        WebElement locationButton = driver.findElement(By.xpath("//button[contains(text(),'Location')]"));
-        locationButton.click();
+        if(driver.getTitle().equals("Login")){
+            driver.get("https://openmrs.org/");
+     }
 
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "expectedUrlAfterLogin");
