@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="SystemTimeZone suite">
+    <test name="TC_410">
+        <classes>
+            <class name="US_410.SystemTimezone"/>
+            <class name="US_402.TC_402"/>
+        </classes>
+    </test>
+</suite>
